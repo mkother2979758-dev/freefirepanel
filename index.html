@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BLUE FIRE PANEL v2.5.0 · GAMING COMPANION</title>
+  <style>
+    /* ----- RESET & GLOBAL ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 20% 30%, #0a0f1e, #02040a);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    /* ----- MAIN PANEL (compact premium) ----- */
+    .panel {
+      width: 100%;
+      max-width: 1180px;
+      background: rgba(6, 12, 24, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 180, 255, 0.25);
+      border-radius: 32px;
+      box-shadow: 
+        0 0 40px rgba(0, 160, 255, 0.25),
+        0 20px 40px -12px rgba(0, 0, 0, 0.8),
+        inset 0 0 30px rgba(0, 180, 255, 0.08);
+      padding: 22px 24px 28px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .panel:hover {
+      box-shadow: 
+        0 0 60px rgba(0, 160, 255, 0.35),
+        0 20px 40px -12px rgba(0, 0, 0, 0.9),
+        inset 0 0 40px rgba(0, 180, 255, 0.12);
+    }
+
+    /* ----- HEADER / LOGO ----- */
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(145deg, #0a1a2e, #02101f);
+      border: 1.5px solid #00c8ff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 0 20px #00a6ff66, inset 0 0 12px #00a6ff33;
+      animation: pulseGlow 3s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 18px #00a6ff66, inset 0 0 8px #00a6ff33; border-color: #00b4ff; }
+      100% { box-shadow: 0 0 32px #0077ff99, inset 0 0 16px #00a6ff66; border-color: #3ac8ff; }
+    }
+
+    .title-block h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #ffffff, #a0d8ff, #40b8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px #0088ff88, 0 0 40px #0044ff33;
+      line-height: 1.1;
+    }
+
+    .title-block span {
+      font-size: 0.7rem;
+      letter-spacing: 6px;
+      color: #2fa0ff;
+      text-shadow: 0 0 12px #0088ff;
+      font-weight: 400;
+      display: block;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .status-badge {
+      background: #03111f;
+      border: 1px solid #0077cc;
+      border-radius: 40px;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #99ddff;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 16px #0088ff33;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: #00ffaa;
+      border-radius: 50%;
+      box-shadow: 0 0 14px #00ffaa;
+      animation: blink 1.8s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ----- NAV TABS ----- */
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 22px;
+      background: rgba(0, 20, 40, 0.6);
+      padding: 6px;
+      border-radius: 60px;
+      border: 1px solid #0a2a44;
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: #7bb8e0;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      flex: 1 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .nav-btn i {
+      font-style: normal;
+      font-size: 1.1rem;
+      filter: drop-shadow(0 0 6px #00a6ff);
+    }
+
+    .nav-btn:hover {
+      color: #b8e2ff;
+      background: #0a253d;
+      box-shadow: 0 0 18px #0077ff44;
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(145deg, #00447a, #002244);
+      color: white;
+      border: 1px solid #00a6ff;
+      box-shadow: 0 0 22px #0088ffaa, inset 0 0 12px #00a6ff55;
+      text-shadow: 0 0 10px #00a6ff;
+    }
+
+    /* ----- SECTIONS (hidden/visible) ----- */
+    .section {
+      display: none;
+      animation: fadeSlide 0.35s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0.4; transform: translateY(6px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ----- GRID / CARDS (compact) ----- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: rgba(2, 16, 30, 0.75);
+      border: 1px solid #0f2e4a;
+      border-radius: 24px;
+      padding: 18px 18px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px -8px #00000080, inset 0 1px 0 #1e4460;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      border-color: #1e7bb8;
+      box-shadow: 0 8px 24px -6px #0066cc40, inset 0 1px 0 #2a7ab0;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.6px;
+      color: #9ac9e8;
+      text-transform: uppercase;
+    }
+
+    .card-header .icon {
+      color: #00b4ff;
+      font-size: 1.3rem;
+      filter: drop-shadow(0 0 8px #0088ff);
+    }
+
+    /* ----- CONTROLS ----- */
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 6px;
+    }
+
+    .slider-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #aad0f0;
+      letter-spacing: 0.4px;
+      font-weight: 500;
+    }
+
+    .slider-label span:last-child {
+      color: #3ac8ff;
+      font-weight: 700;
+      text-shadow: 0 0 10px #0088ff;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #003f66, #0077cc);
+      border-radius: 10px;
+      outline: none;
+      box-shadow: inset 0 0 6px #00000066, 0 0 10px #0066ff33;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, #ffffff, #00a6ff);
+      border-radius: 50%;
+      border: 2px solid #003366;
+      box-shadow: 0 0 20px #00a6ff, 0 0 40px #0088ff;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 28px #00ccff, 0 0 50px #0088ff;
+    }
+
+    /* ---- TOGGLE SWITCHES ---- */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #102a3e;
+    }
+
+    .toggle-row:last-child {
+      border-bottom: none;
+    }
+
+    .toggle-label {
+      font-size: 0.88rem;
+      color: #c2def5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toggle-switch {
+      width: 48px;
+      height: 26px;
+      background: #0c1e2e;
+      border-radius: 30px;
+      border: 1px solid #0f3a58;
+      box-shadow: inset 0 0 12px #00000088;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.25s;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #8ab8d9, #4a6f8a);
+      border-radius: 50%;
+      top: 2px;
+      left: 3px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 12px #00000088;
+    }
+
+    .toggle-switch.on {
+      background: #005f99;
+      border-color: #00a6ff;
+      box-shadow: 0 0 22px #0088ffaa, inset 0 0 12px #00a6ff;
+    }
+
+    .toggle-switch.on::after {
+      left: 25px;
+      background: radial-gradient(circle, #ffffff, #00a6ff);
+      box-shadow: 0 0 20px #00a6ff;
+    }
+
+    /* ----- BUTTONS ----- */
+    .btn {
+      background: #0a192a;
+      border: 1px solid #1d5b8c;
+      color: #b3e0ff;
+      padding: 10px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 0 12px #00448822;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background: linear-gradient(145deg, #004f99, #003366);
+      border-color: #00a6ff;
+      color: white;
+      box-shadow: 0 0 22px #0088ff66;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(145deg, #0066cc, #004488);
+      box-shadow: 0 0 36px #00a6ff, 0 0 12px #0088ff inset;
+      transform: scale(1.02);
+    }
+
+    .btn-secondary:hover {
+      background: #14344e;
+      border-color: #2e8bc0;
+      box-shadow: 0 0 20px #0088ff55;
+    }
+
+    .btn-danger {
+      border-color: #aa3355;
+      color: #ffaac0;
+      background: #1a0a12;
+    }
+
+    .btn-danger:hover {
+      background: #330a1a;
+      border-color: #ff4466;
+      box-shadow: 0 0 24px #ff004466;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      justify-content: center;
+    }
+
+    /* ----- HUD PREVIEW & PRACTICE ----- */
+    .hud-preview {
+      background: #05101c;
+      border: 2px solid #0b2c48;
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: inset 0 0 30px #00000088, 0 0 20px #00448822;
+    }
+
+    .hud-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hud-bar-bg {
+      flex: 1;
+      height: 12px;
+      background: #0a1c2c;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px #000000;
+    }
+
+    .hud-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0066ff, #00ccff);
+      border-radius: 20px;
+      box-shadow: 0 0 18px #00a6ff;
+      transition: width 0.3s ease;
+    }
+
+    .hud-label {
+      font-size: 0.75rem;
+      color: #8bb8da;
+      min-width: 60px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .practice-stats {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0 6px;
+      font-size: 0.8rem;
+      color: #aad0f0;
+    }
+
+    .practice-bar {
+      width: 100%;
+      height: 10px;
+      background: #0c1e2c;
+      border-radius: 10px;
+      margin: 8px 0 14px;
+      box-shadow: inset 0 0 10px #000;
+    }
+
+    .practice-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00aaff, #00ffcc);
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ccff;
+      transition: width 0.3s ease;
+    }
+
+    /* ----- COMPACT MODIFIERS ----- */
+    .mini-badge {
+      font-size: 0.65rem;
+      background: #0b2c44;
+      padding: 4px 10px;
+      border-radius: 30px;
+      color: #6cb8e8;
+      border: 1px solid #1b5f88;
+    }
+
+    .demo-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      background: #1a2a3a;
+      padding: 3px 9px;
+      border-radius: 30px;
+      color: #ffaa44;
+      border: 1px solid #aa7733;
+      box-shadow: 0 0 10px #ffaa4422;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-left: 6px;
+    }
+
+    .mt-2 { margin-top: 12px; }
+    .mb-2 { margin-bottom: 12px; }
+    .text-center { text-align: center; }
+    .flex-between { display: flex; align-items: center; justify-content: space-between; }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 780px) {
+      .panel {
+        padding: 18px 16px 22px;
+        border-radius: 28px;
+      }
+      .title-block h1 { font-size: 1.4rem; letter-spacing: 1px; }
+      .logo-icon { width: 40px; height: 40px; font-size: 22px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 12px; }
+      .nav-btn { padding: 8px 12px; font-size: 0.75rem; }
+      .nav-btn i { font-size: 0.9rem; }
+      .status-badge { font-size: 0.7rem; padding: 6px 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .logo-bar { flex-direction: column; align-items: flex-start; }
+      .nav-tabs { gap: 3px; }
+      .nav-btn { padding: 8px 8px; font-size: 0.7rem; }
+      .btn { padding: 8px 12px; font-size: 0.7rem; }
+    }
+
+    /* custom scroll for no overflow */
+    ::-webkit-scrollbar { width: 0; background: transparent; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+
+    <!-- ========== LOGO / TITLE ========== -->
+    <div class="logo-bar">
+      <div class="logo-group">
+        <div class="logo-icon">🔥</div>
+        <div class="title-block">
+          <h1>BLUE FIRE PANEL</h1>
+          <span>GAMING COMPANION · PRO</span>
+        </div>
+      </div>
+      <div class="status-badge">
+        <span class="status-dot"></span> LOCAL MODE
+      </div>
+    </div>
+
+    <!-- ========== NAVIGATION TABS ========== -->
+    <div class="nav-tabs" id="navTabs">
+      <button class="nav-btn active" data-tab="home"><i>🏠</i> Home</button>
+      <button class="nav-btn" data-tab="sensitivity"><i>🎯</i> Sensitivity</button>
+      <button class="nav-btn" data-tab="hud"><i>🖥️</i> HUD</button>
+      <button class="nav-btn" data-tab="practice"><i>⚡</i> Practice</button>
+      <button class="nav-btn" data-tab="settings"><i>⚙️</i> Settings</button>
+    </div>
+
+    <div class="card" style="margin:-8px 0 20px;padding:12px 16px;border-color:rgba(0,180,255,.28);">
+      <div style="font-size:.82rem;line-height:1.55;color:#a9d9f5;">
+        <strong style="color:#55caff;">LOCAL COMPANION DEMO:</strong> This panel works only inside your browser. It does not connect to any game, control aim, detect enemies, reveal player locations, or create an in-game overlay.
+      </div>
+    </div>
+
+    <!-- ========== HOME SECTION ========== -->
+    <div class="section active" id="section-home">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><span class="icon">🔥</span> QUICK STATUS</div>
+          <div class="toggle-row">
+            <span class="toggle-label">🔥 Fire Mode <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch on" data-toggle="fireMode"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">🎯 Aim Assist <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch" data-toggle="aimAssist"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">🖥️ HUD Overlay <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch on" data-toggle="hudOverlay"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">⚡ Performance Mode <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch on" data-toggle="perfMode"></div>
+          </div>
+          <div class="flex-between mt-2">
+            <span class="mini-badge">MODE: LOCAL</span>
+            <span class="mini-badge">DEVICE: BROWSER</span>
+            <span class="mini-badge">STATUS: READY</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="icon">📊</span> SESSION TRACKER <span class="demo-badge">DEMO</span></div>
+          <div class="slider-group">
+            <div class="slider-item">
+              <div class="slider-label"><span>Session Time</span><span id="sessionTime">00:00</span></div>
+              <div class="hud-bar-bg"><div class="hud-bar-fill" style="width:0%" id="sessionBar"></div></div>
+            </div>
+            <div class="slider-item">
+              <div class="slider-label"><span>Focus Level</span><span id="focusVal">78%</span></div>
+              <div class="hud-bar-bg"><div class="hud-bar-fill" style="width:78%" id="focusBar"></div></div>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" id="boostBtn">⚡ BOOST <span class="demo-badge">DEMO</span></button>
+            <button class="btn btn-secondary" id="resetStatsBtn">↻ RESET</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SENSITIVITY SECTION ========== -->
+    <div class="section" id="section-sensitivity">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><span class="icon">🎯</span> SENSITIVITY PROFILE</div>
+          <div class="slider-group">
+            <div class="slider-item">
+              <div class="slider-label"><span>General</span><span id="genVal">45</span></div>
+              <input type="range" id="genSens" min="0" max="100" value="45">
+            </div>
+            <div class="slider-item">
+              <div class="slider-label"><span>Red Dot</span><span id="redVal">50</span></div>
+              <input type="range" id="redSens" min="0" max="100" value="50">
+            </div>
+            <div class="slider-item">
+              <div class="slider-label"><span>2x Scope</span><span id="scope2Val">40</span></div>
+              <input type="range" id="scope2Sens" min="0" max="100" value="40">
+            </div>
+            <div class="slider-item">
+              <div class="slider-label"><span>4x Scope</span><span id="scope4Val">30</span></div>
+              <input type="range" id="scope4Sens" min="0" max="100" value="30">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" id="saveProfileBtn">💾 SAVE PROFILE</button>
+            <button class="btn btn-danger" id="resetProfileBtn">⟲ RESET</button>
+          </div>
+          <div class="text-center mt-2"><span class="mini-badge" id="saveStatus">Default profile</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="icon">⚡</span> ADVANCED TUNING</div>
+          <div class="toggle-row">
+            <span class="toggle-label">Acceleration <span class="demo-badge">PROFILE</span></span>
+            <div class="toggle-switch" data-toggle="accel"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Precision Mode <span class="demo-badge">PROFILE</span></span>
+            <div class="toggle-switch on" data-toggle="precision"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Gyro Assist <span class="demo-badge">PROFILE</span></span>
+            <div class="toggle-switch" data-toggle="gyro"></div>
+          </div>
+          <div class="slider-item mt-2">
+            <div class="slider-label"><span>Damping</span><span id="dampVal">20</span></div>
+            <input type="range" id="dampSens" min="0" max="100" value="20">
+          </div>
+          <div class="text-center mt-2"><span class="mini-badge">PROFILE: CUSTOM</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HUD SECTION ========== -->
+    <div class="section" id="section-hud">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><span class="icon">🖥️</span> HUD LAYOUT PREVIEW <span class="demo-badge">DEMO</span></div>
+          <div class="hud-preview">
+            <div class="hud-item"><span class="hud-label">Health</span><div class="hud-bar-bg"><div class="hud-bar-fill" style="width:85%"></div></div></div>
+            <div class="hud-item"><span class="hud-label">Ammo</span><div class="hud-bar-bg"><div class="hud-bar-fill" style="width:65%"></div></div></div>
+            <div class="hud-item"><span class="hud-label">Armor</span><div class="hud-bar-bg"><div class="hud-bar-fill" style="width:45%"></div></div></div>
+            <div class="hud-item"><span class="hud-label">Stamina</span><div class="hud-bar-bg"><div class="hud-bar-fill" style="width:70%"></div></div></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" id="cycleHudBtn">↻ CYCLE LAYOUT</button>
+            <button class="btn btn-primary" id="applyHudBtn">✓ APPLY</button>
+          </div>
+          <div class="text-center mt-2"><span class="mini-badge">PREVIEW ONLY — NO GAME OVERLAY</span></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="icon">📐</span> HUD OPTIONS</div>
+          <div class="toggle-row">
+            <span class="toggle-label">Show FPS <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch on" data-toggle="showFps"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Show Ping <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch on" data-toggle="showPing"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Minimal Mode <span class="demo-badge">PREVIEW</span></span>
+            <div class="toggle-switch" data-toggle="minimalHud"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Crosshair Glow <span class="demo-badge">PREVIEW</span></span>
+            <div class="toggle-switch on" data-toggle="crosshairGlow"></div>
+          </div>
+          <div class="flex-between mt-2">
+            <span class="mini-badge">OPACITY: 85%</span>
+            <span class="mini-badge">SCALE: 1.0x</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== PRACTICE SECTION ========== -->
+    <div class="section" id="section-practice">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><span class="icon">⚡</span> PRACTICE TRACKER <span class="demo-badge">DEMO</span></div>
+          <div class="practice-stats">
+            <span>Daily Goal</span><span id="practiceGoalText">0 / 30 min</span>
+          </div>
+          <div class="practice-bar"><div class="practice-fill" id="practiceFill" style="width:0%"></div></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" id="practiceAddBtn">+ ADD 5 MIN</button>
+            <button class="btn btn-secondary" id="practiceResetBtn">⟲ RESET</button>
+          </div>
+          <div class="flex-between mt-2">
+            <span class="mini-badge">STREAK: LOCAL</span>
+            <span class="mini-badge">ACCURACY: N/A</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="icon">🎯</span> DRILL MODES <span class="demo-badge">DEMO</span></div>
+          <div class="toggle-row">
+            <span class="toggle-label">Aim Lab</span>
+            <div class="toggle-switch on" data-toggle="aimLab"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Recoil Control</span>
+            <div class="toggle-switch on" data-toggle="recoil"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Tracking</span>
+            <div class="toggle-switch" data-toggle="tracking"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" id="startDrillBtn">▶ START DRILL</button>
+          </div>
+          <div class="text-center mt-2"><span class="mini-badge" id="drillStatus">Ready</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SETTINGS SECTION ========== -->
+    <div class="section" id="section-settings">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><span class="icon">⚙️</span> GENERAL SETTINGS</div>
+          <div class="toggle-row">
+            <span class="toggle-label">Dark Theme <span class="demo-badge">VISUAL</span></span>
+            <div class="toggle-switch on" data-toggle="darkMode"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Sound Effects <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch" data-toggle="soundFx"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Auto Save <span class="demo-badge">STATUS ONLY</span></span>
+            <div class="toggle-switch on" data-toggle="autoSave"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Notifications <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch" data-toggle="notifications"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="icon">🔧</span> SYSTEM</div>
+          <div class="toggle-row">
+            <span class="toggle-label">Overlay Enabled <span class="demo-badge">DEMO</span></span>
+            <div class="toggle-switch on" data-toggle="overlay"></div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Auto Update <span class="demo-badge">NOT CONNECTED</span></span>
+            <div class="toggle-switch on" data-toggle="autoUpdate"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" id="exportBtn">⬇ EXPORT CONFIG</button>
+            <button class="btn btn-secondary" id="importBtn">⬆ IMPORT</button>
+          </div>
+          <input type="file" id="importFileInput" accept=".json,application/json" style="display:none">
+          <div class="text-center mt-2"><span class="mini-badge" id="configStatus">VERSION 2.5.0</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ---------- CONSTANTS ----------
+      const STORAGE_KEYS = {
+        SENS: 'bfp_sensitivity',
+        PRACTICE: 'bfp_practice',
+        TOGGLES: 'bfp_toggles'
+      };
+
+      const DEFAULT_SENS = { gen: 45, red: 50, scope2: 40, scope4: 30, damp: 20 };
+      const GOAL_MINUTES = 30;
+
+      // ---------- DOM REFS ----------
+      const navBtns = document.querySelectorAll('.nav-btn');
+      const sections = {
+        home: document.getElementById('section-home'),
+        sensitivity: document.getElementById('section-sensitivity'),
+        hud: document.getElementById('section-hud'),
+        practice: document.getElementById('section-practice'),
+        settings: document.getElementById('section-settings')
+      };
+
+      // Sensitivity elements
+      const genSens = document.getElementById('genSens');
+      const redSens = document.getElementById('redSens');
+      const scope2Sens = document.getElementById('scope2Sens');
+      const scope4Sens = document.getElementById('scope4Sens');
+      const dampSens = document.getElementById('dampSens');
+      const genVal = document.getElementById('genVal');
+      const redVal = document.getElementById('redVal');
+      const scope2Val = document.getElementById('scope2Val');
+      const scope4Val = document.getElementById('scope4Val');
+      const dampVal = document.getElementById('dampVal');
+      const saveProfileBtn = document.getElementById('saveProfileBtn');
+      const resetProfileBtn = document.getElementById('resetProfileBtn');
+      const saveStatus = document.getElementById('saveStatus');
+
+      // Practice elements
+      const practiceFill = document.getElementById('practiceFill');
+      const practiceGoalText = document.getElementById('practiceGoalText');
+      const practiceAddBtn = document.getElementById('practiceAddBtn');
+      const practiceResetBtn = document.getElementById('practiceResetBtn');
+
+      // Session (demo) elements
+      const boostBtn = document.getElementById('boostBtn');
+      const resetStatsBtn = document.getElementById('resetStatsBtn');
+      const focusBar = document.getElementById('focusBar');
+      const focusVal = document.getElementById('focusVal');
+      const sessionBar = document.getElementById('sessionBar');
+      const sessionTime = document.getElementById('sessionTime');
+
+      // HUD demo elements
+      const cycleHudBtn = document.getElementById('cycleHudBtn');
+      const applyHudBtn = document.getElementById('applyHudBtn');
+      const hudBars = document.querySelectorAll('#section-hud .hud-preview .hud-bar-fill');
+
+      // Drill demo
+      const startDrillBtn = document.getElementById('startDrillBtn');
+      const drillStatus = document.getElementById('drillStatus');
+
+      // Export / import
+      const exportBtn = document.getElementById('exportBtn');
+      const importBtn = document.getElementById('importBtn');
+      const importFileInput = document.getElementById('importFileInput');
+      const configStatus = document.getElementById('configStatus');
+
+      // Toggles
+      const toggles = document.querySelectorAll('.toggle-switch');
+
+      // ---------- HELPERS ----------
+      function safeSetItem(key, value) {
+        try { localStorage.setItem(key, value); return true; }
+        catch (e) { console.warn('localStorage unavailable:', e); return false; }
+      }
+      function safeGetItem(key) {
+        try { return localStorage.getItem(key); }
+        catch (e) { return null; }
+      }
+
+      // ---------- TAB NAVIGATION ----------
+      function activateTab(tabName) {
+        navBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabName));
+        Object.entries(sections).forEach(([key, el]) => el.classList.toggle('active', key === tabName));
+      }
+      navBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
+
+      // ---------- SENSITIVITY: SAVE / LOAD ----------
+      function getSensValues() {
+        return {
+          gen: parseInt(genSens.value, 10),
+          red: parseInt(redSens.value, 10),
+          scope2: parseInt(scope2Sens.value, 10),
+          scope4: parseInt(scope4Sens.value, 10),
+          damp: parseInt(dampSens.value, 10)
+        };
+      }
+
+      function applySensValues(values, statusMsg) {
+        genSens.value = values.gen; genVal.textContent = values.gen;
+        redSens.value = values.red; redVal.textContent = values.red;
+        scope2Sens.value = values.scope2; scope2Val.textContent = values.scope2;
+        scope4Sens.value = values.scope4; scope4Val.textContent = values.scope4;
+        dampSens.value = values.damp; dampVal.textContent = values.damp;
+        if (statusMsg) saveStatus.textContent = statusMsg;
+      }
+
+      function loadSensFromStorage() {
+        const raw = safeGetItem(STORAGE_KEYS.SENS);
+        if (!raw) return;
+        try {
+          const parsed = JSON.parse(raw);
+          const merged = { ...DEFAULT_SENS, ...parsed };
+          applySensValues(merged, 'Profile loaded from storage');
+        } catch (e) {
+          console.warn('Could not parse saved sensitivity:', e);
+        }
+      }
+
+      function saveSensToStorage() {
+        const values = getSensValues();
+        const ok = safeSetItem(STORAGE_KEYS.SENS, JSON.stringify(values));
+        saveStatus.textContent = ok
+          ? '✅ Saved to localStorage · ' + new Date().toLocaleTimeString()
+          : '⚠️ localStorage unavailable — not saved';
+      }
+
+      saveProfileBtn.addEventListener('click', saveSensToStorage);
+
+      resetProfileBtn.addEventListener('click', () => {
+        applySensValues(DEFAULT_SENS, '⟲ Reset to default');
+        safeSetItem(STORAGE_KEYS.SENS, JSON.stringify(DEFAULT_SENS));
+      });
+
+      // live value display
+      const sensPairs = [
+        [genSens, genVal], [redSens, redVal],
+        [scope2Sens, scope2Val], [scope4Sens, scope4Val],
+        [dampSens, dampVal]
+      ];
+      sensPairs.forEach(([slider, display]) => {
+        slider.addEventListener('input', () => display.textContent = slider.value);
+      });
+
+      // ---------- PRACTICE TRACKER: SAVE / LOAD ----------
+      let practiceMinutes = 0;
+
+      function updatePracticeUI() {
+        const percent = Math.min(100, (practiceMinutes / GOAL_MINUTES) * 100);
+        practiceFill.style.width = percent + '%';
+        practiceGoalText.textContent = practiceMinutes + ' / ' + GOAL_MINUTES + ' min';
+      }
+
+      function savePractice() {
+        safeSetItem(STORAGE_KEYS.PRACTICE, String(practiceMinutes));
+      }
+
+      function loadPractice() {
+        const raw = safeGetItem(STORAGE_KEYS.PRACTICE);
+        if (raw !== null) {
+          const parsed = parseInt(raw, 10);
+          if (!isNaN(parsed) && parsed >= 0 && parsed <= GOAL_MINUTES) {
+            practiceMinutes = parsed;
+          }
+        }
+        updatePracticeUI();
+      }
+
+      practiceAddBtn.addEventListener('click', () => {
+        if (practiceMinutes < GOAL_MINUTES) {
+          practiceMinutes = Math.min(GOAL_MINUTES, practiceMinutes + 5);
+          updatePracticeUI();
+          savePractice();
+        }
+      });
+
+      practiceResetBtn.addEventListener('click', () => {
+        practiceMinutes = 0;
+        updatePracticeUI();
+        savePractice();
+      });
+
+      // ---------- TOGGLES: PERSIST STATE ----------
+      function loadToggles() {
+        const raw = safeGetItem(STORAGE_KEYS.TOGGLES);
+        if (!raw) return;
+        try {
+          const state = JSON.parse(raw);
+          toggles.forEach(t => {
+            const key = t.dataset.toggle;
+            if (key && typeof state[key] === 'boolean') {
+              t.classList.toggle('on', state[key]);
+            }
+          });
+        } catch (e) {
+          console.warn('Could not parse saved toggles:', e);
+        }
+      }
+
+      function saveToggles() {
+        const state = {};
+        toggles.forEach(t => {
+          const key = t.dataset.toggle;
+          if (key) state[key] = t.classList.contains('on');
+        });
+        safeSetItem(STORAGE_KEYS.TOGGLES, JSON.stringify(state));
+      }
+
+      toggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          this.classList.toggle('on');
+          saveToggles();
+        });
+      });
+
+      // ---------- EXPORT CONFIG: REAL JSON DOWNLOAD ----------
+      function buildConfigObject() {
+        const toggleState = {};
+        toggles.forEach(t => {
+          const key = t.dataset.toggle;
+          if (key) toggleState[key] = t.classList.contains('on');
+        });
+        return {
+          app: 'BLUE FIRE PANEL',
+          version: '2.5.0',
+          exportedAt: new Date().toISOString(),
+          sensitivity: getSensValues(),
+          toggles: toggleState,
+          practiceMinutes: practiceMinutes
+        };
+      }
+
+      exportBtn.addEventListener('click', () => {
+        const config = buildConfigObject();
+        const jsonStr = JSON.stringify(config, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+        a.href = url;
+        a.download = `blue-fire-panel-config-${stamp}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        configStatus.textContent = '✅ Config downloaded';
+        setTimeout(() => { configStatus.textContent = 'VERSION 2.5.0'; }, 2500);
+      });
+
+      // ---------- IMPORT CONFIG: REAL JSON FILE INPUT ----------
+      importBtn.addEventListener('click', () => importFileInput.click());
+
+      importFileInput.addEventListener('change', (event) => {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const parsed = JSON.parse(e.target.result);
+            if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed) ||
+                parsed.app !== 'BLUE FIRE PANEL' ||
+                typeof parsed.version !== 'string' ||
+                (!parsed.sensitivity && !parsed.toggles && typeof parsed.practiceMinutes !== 'number')) {
+              throw new Error('Unsupported config format');
+            }
+            applyImportedConfig(parsed);
+            configStatus.textContent = '✅ Config imported';
+          } catch (err) {
+            console.error('Import failed:', err);
+            configStatus.textContent = '❌ Invalid JSON file';
+          } finally {
+            importFileInput.value = '';
+            setTimeout(() => { configStatus.textContent = 'VERSION 2.5.0'; }, 3000);
+          }
+        };
+        reader.onerror = () => {
+          configStatus.textContent = '❌ Could not read file';
+          importFileInput.value = '';
+        };
+        reader.readAsText(file);
+      });
+
+      function applyImportedConfig(cfg) {
+        // sensitivity
+        if (cfg.sensitivity && typeof cfg.sensitivity === 'object' && !Array.isArray(cfg.sensitivity)) {
+          const s = cfg.sensitivity;
+          const values = {
+            gen: clampInt(s.gen, 0, 100, DEFAULT_SENS.gen),
+            red: clampInt(s.red, 0, 100, DEFAULT_SENS.red),
+            scope2: clampInt(s.scope2, 0, 100, DEFAULT_SENS.scope2),
+            scope4: clampInt(s.scope4, 0, 100, DEFAULT_SENS.scope4),
+            damp: clampInt(s.damp, 0, 100, DEFAULT_SENS.damp)
+          };
+          applySensValues(values, 'Profile imported');
+          safeSetItem(STORAGE_KEYS.SENS, JSON.stringify(values));
+        }
+        // toggles
+        if (cfg.toggles && typeof cfg.toggles === 'object' && !Array.isArray(cfg.toggles)) {
+          toggles.forEach(t => {
+            const key = t.dataset.toggle;
+            if (key && typeof cfg.toggles[key] === 'boolean') {
+              t.classList.toggle('on', cfg.toggles[key]);
+            }
+          });
+          saveToggles();
+        }
+        // practice
+        if (typeof cfg.practiceMinutes === 'number' && !isNaN(cfg.practiceMinutes)) {
+          practiceMinutes = clampInt(cfg.practiceMinutes, 0, GOAL_MINUTES, 0);
+          updatePracticeUI();
+          savePractice();
+        }
+      }
+
+      function clampInt(value, min, max, fallback) {
+        const n = parseInt(value, 10);
+        if (isNaN(n)) return fallback;
+        return Math.max(min, Math.min(max, n));
+      }
+
+      // ---------- DEMO: SESSION TRACKER ----------
+      let focus = 78;
+      let sessionSec = 0;
+
+      function updateFocusUI() {
+        focusBar.style.width = focus + '%';
+        focusVal.textContent = focus + '%';
+      }
+
+      boostBtn.addEventListener('click', () => {
+        focus = Math.min(100, focus + 8);
+        updateFocusUI();
+      });
+
+      resetStatsBtn.addEventListener('click', () => {
+        focus = 78;
+        sessionSec = 0;
+        updateFocusUI();
+        sessionBar.style.width = '0%';
+        sessionTime.textContent = '00:00';
+      });
+
+      setInterval(() => {
+        sessionSec++;
+        const mins = Math.floor(sessionSec / 60);
+        const secs = sessionSec % 60;
+        sessionTime.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        sessionBar.style.width = Math.min(100, (sessionSec / 600) * 100) + '%';
+      }, 1000);
+
+      // ---------- DEMO: HUD LAYOUT CYCLE ----------
+      const hudBase = [85, 65, 45, 70];
+      const hudOffsets = [[0, 0, 0, 0], [15, 10, 5, -10], [-10, 15, 20, 5]];
+      let hudCycle = 0;
+
+      cycleHudBtn.addEventListener('click', () => {
+        hudCycle = (hudCycle + 1) % hudOffsets.length;
+        const off = hudOffsets[hudCycle];
+        hudBars.forEach((bar, idx) => {
+          let val = hudBase[idx] + off[idx];
+          val = Math.max(5, Math.min(100, val));
+          bar.style.width = val + '%';
+        });
+        applyHudBtn.textContent = '✓ APPLY (' + (hudCycle + 1) + ')';
+      });
+
+      applyHudBtn.addEventListener('click', () => {
+        applyHudBtn.textContent = '✓ APPLIED';
+        setTimeout(() => { applyHudBtn.textContent = '✓ APPLY'; }, 1200);
+      });
+
+      // ---------- DEMO: DRILL ----------
+      startDrillBtn.addEventListener('click', () => {
+        drillStatus.textContent = '⏳ DRILL ACTIVE (DEMO)';
+        startDrillBtn.textContent = '⏸ PAUSE';
+        setTimeout(() => {
+          drillStatus.textContent = '✔ COMPLETED (DEMO)';
+          startDrillBtn.textContent = '▶ START DRILL';
+        }, 1500);
+      });
+
+      // ---------- INIT ----------
+      loadSensFromStorage();
+      loadPractice();
+      loadToggles();
+      updateFocusUI();
+      updatePracticeUI();
+
+    })();
+  </script>
+</body>
+</html>
